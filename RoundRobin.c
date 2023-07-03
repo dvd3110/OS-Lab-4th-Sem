@@ -3,7 +3,7 @@
 int main()
 {
     int i, wt = 0, tat = 0, n, quant, sum = 0, count = 0;
-    printf("Enter the number of process in the system: ");
+    printf("Enter number of processes: ");
     scanf("%d", &n);
     int y = n, at[n], bt[n], temp[n];
     for (i = 0; i < n; i++)
@@ -11,14 +11,13 @@ int main()
         printf("\n Enter the Arrival and Burst time of the Process[%d]: ", i + 1);
         scanf("%d", &at[i]);
         scanf("%d", &bt[i]);
-        temp[i] = bt[i];
+        temp[i] = bt[i]; // store the burst time in temp array
     }
     printf("Enter the time quantum for the process: \t");
     scanf("%d", &quant);
     printf("\n Process No \t\t Burst Time \t\t TAT \t\t Waiting Time ");
-    while (y != 0)
+    for (sum = 0, i = 0; y != 0;)
     {
-        i = 0;
         if (temp[i] <= quant && temp[i] > 0)
         {
             sum = sum + temp[i];
