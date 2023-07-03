@@ -10,19 +10,21 @@ void swap(int *a, int *b)
 int main()
 {
     int n;
-    printf("Enter Number of Processes: ");
+    printf("Enter the number of processes: ");
     scanf("%d", &n);
-    int b[n], p[n], pid[n];
+    int bt[n], p[n], pid[n];
     for (int i = 0; i < n; i++)
     {
-        printf("Enter Burst Time and Priority Value for Process %d: ", i + 1);
-        scanf("%d %d", &b[i], &p[i]);
+        printf("Enter burst time and priority for process %d: ", i + 1);
+        scanf("%d %d", &bt[i], &p[i]);
         pid[i] = i + 1;
     }
-    for (int i = 0; i < n; i++)
+
+    int i, j, a, m;
+    for (i = 0; i < n - 1; i++)
     {
-        int a = p[i], m = i;
-        for (int j = i; j < n; j++)
+        a = p[i], m = i;
+        for (j = i; j < n; j++)
         {
             if (p[j] > a)
             {
@@ -31,23 +33,26 @@ int main()
             }
         }
         swap(&p[i], &p[m]);
-        swap(&b[i], &b[m]);
+        swap(&bt[i], &bt[m]);
         swap(&pid[i], &pid[m]);
     }
-    int t = 0;
-    printf("Order of process Execution is\n");
-    for (int i = 0; i < n; i++)
+
+    int time = 0;
+    printf("Order of process execution is:-");
+    for (i = 0; i < n; i++)
     {
-        printf("P%d is executed from %d to %d\n", pid[i], t, t + b[i]);
-        t += b[i];
+        printf("P%d is executed from %d to %d\n", pid[i], time, time + bt[i]);
+        time += bt[i];
     }
     printf("\n");
-    printf("Process Id     Burst Time   Wait Time    TurnAround Time\n");
-    int wait_time = 0;
-    for (int i = 0; i < n; i++)
+
+    printf("Process Id  Burst Time  Wait Time  TurnAround Time\n");
+    int waitTime = 0;
+    for (i = 0; i < n; i++)
     {
-        printf("P%d          %d          %d          %d\n", pid[i], b[i], wait_time, wait_time + b[i]);
-        wait_time += b[i];
+        printf("%d\t\t%d\t%d\t\t%d\n", pid[i], bt[i], waitTime, waitTime + bt[i]);
+        waitTime += bt[i];
     }
+
     return 0;
 }
